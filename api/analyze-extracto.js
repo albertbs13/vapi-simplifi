@@ -30,6 +30,10 @@ Responde con claridad, resumen e ideas útiles.
   res.status(200).json({ respuesta });
 
 } catch (error) {
-  console.error("ERROR DETECTADO:", error.message);
-  res.status(500).json({ error: error.message || "Error al procesar la petición con OpenAI" });
+  console.error("ERROR DETECTADO:", error);
+  res.status(500).json({
+    error: error.message || "Error interno",
+    detalles: error
+  });
 }
+
