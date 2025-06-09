@@ -1,0 +1,8 @@
+{
+  "builds": [
+    {
+      "src": "api/analyze-extracto.js",
+      "use": "@vercel/node"
+    }
+  ]
+}
