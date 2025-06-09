@@ -16,15 +16,20 @@ Responde con claridad, resumen e ideas útiles.
   `;
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4-turbo",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.3,
-    });
-
-    const respuesta = completion.choices[0].message.content;
-    res.status(200).json({ respuesta });
-  } catch (error) {
-    res.status(500).json({ error: "Error al procesar la petición" });
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error("OPENAI_API_KEY is not defined");
   }
+
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4",
+    messages: [{ role: "user", content: prompt }],
+    temperature: 0.3,
+  });
+
+  const respuesta = completion.choices[0].message.content;
+  res.status(200).json({ respuesta });
+
+} catch (error) {
+  console.error("ERROR DETECTADO:", error.message);
+  res.status(500).json({ error: error.message || "Error al procesar la petición con OpenAI" });
 }
