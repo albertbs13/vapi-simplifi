@@ -4,5 +4,11 @@
       "src": "api/analyze-extracto.js",
       "use": "@vercel/node"
     }
+  ],
+  "routes": [
+    {
+      "src": "/api/analyze-extracto",
+      "dest": "api/analyze-extracto.js"
+    }
   ]
 }
